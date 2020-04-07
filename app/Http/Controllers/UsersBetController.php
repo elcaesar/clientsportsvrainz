@@ -35,7 +35,13 @@ class UsersBetController extends Controller
 
         }elseif($status >= 404 && $status <= 599){
             
-            return view('error')->with('status' , $status);
+            //Si la request HTTP falla entonces se consulta la DB
+            $user = DB::table('users')->where('ani' , $ani)->first();
+            if($user != "null"){
+                return view('error')->with(['status' => $status , 'msg' => 'El usuario no pertenece a la categoría Beta']);
+            }else{
+                return view('error')->with(['status' => $status , 'msg' => 'Datos solicitados no existen en los registros.']);
+            }
         }
     }
     
