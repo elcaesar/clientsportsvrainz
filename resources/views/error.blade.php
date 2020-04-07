@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('error')
-    {{'Hubo un error en la consulta. Error: '.$status}}
+    {{$msg."  ".$status}}
 @endsection
 
 @section('script')
